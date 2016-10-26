@@ -1,1 +1,1 @@
-Just some bar-minimum code to allow someone to experiment with the JavaScript canvas API.
+This is intended to be a "starter kit" for experimenting with the JavaScript canvas API.

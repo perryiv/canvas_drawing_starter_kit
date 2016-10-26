@@ -15,6 +15,12 @@
 // Make zepto seem like jQuery.
 var jQuery = $;
 
+// Global variables, sort of.
+var program = {
+  canvas: null,
+  context: null
+};
+
 
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -32,9 +38,8 @@ var onResize = function()
   var height = container.height();
 
   // Set the size of the canvas.
-  var canvas = document.getElementById ( "canvas" );
-  canvas.width = width;
-  canvas.height = height;
+  program.canvas.width = width;
+  program.canvas.height = height;
 };
 
 
@@ -49,17 +54,19 @@ jQuery ( document ).ready ( function()
   // Set up event handlers.
   jQuery ( window ).bind ( "resize", onResize );
 
+  // Get the canvas element.
+  // This sets the global variable.
+  program.canvas = document.getElementById ( "canvas" );
+
+  // Get its context.
+  // This sets the global variable.
+  program.context = program.canvas.getContext ( "2d" );
+
   // Simulate one resize event.
   onResize();
 
-  // Get the canvas element.
-  var canvas = document.getElementById ( "canvas" );
-
-  // Get its context.
-  var context = canvas.getContext ( "2d" );
-
   // Start the repeated calls to the draw function.
-  window.requestAnimationFrame ( drawCanvas.bind ( context, canvas.width, canvas.height ) );
+  window.requestAnimationFrame ( drawCanvas.bind ( program.context, program.canvas.width, program.canvas.height ) );
 } );
 
 
@@ -79,18 +86,26 @@ var toHex = function ( num )
 
 ////////////////////////////////////////////////////////////////////////////////
 //
+//  Set the fill color.
+//
+////////////////////////////////////////////////////////////////////////////////
+
+var setFillColor = function ( red, green, blue )
+{
+  program.context.fillStyle = "#" + toHex ( red ) + toHex ( green ) + toHex ( blue );
+};
+
+
+////////////////////////////////////////////////////////////////////////////////
+//
 //  Fill in the canvas with the color.
 //
 ////////////////////////////////////////////////////////////////////////////////
 
 var background = function ( red, green, blue )
 {
-  // Get the context.
-  var canvas = document.getElementById ( "canvas" );
-  var context = canvas.getContext ( "2d" );
-
-  context.fillStyle = "#" + toHex ( red ) + toHex ( green ) + toHex ( blue );
-  context.fillRect ( 0, 0, canvas.width, canvas.height );
+  setFillColor ( red, green, blue );
+  program.context.fillRect ( 0, 0, program.canvas.width, program.canvas.height );
 };
 
 

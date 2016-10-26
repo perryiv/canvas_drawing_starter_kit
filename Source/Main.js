@@ -65,6 +65,37 @@ jQuery ( document ).ready ( function()
 
 ////////////////////////////////////////////////////////////////////////////////
 //
+//  Convert the number to hexadecimal.
+//  http://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+//
+////////////////////////////////////////////////////////////////////////////////
+
+var toHex = function ( num )
+{
+  var hex = num.toString ( 16 );
+  return hex.length == 1 ? "0" + hex : hex;
+};
+
+
+////////////////////////////////////////////////////////////////////////////////
+//
+//  Fill in the canvas with the color.
+//
+////////////////////////////////////////////////////////////////////////////////
+
+var background = function ( red, green, blue )
+{
+  // Get the context.
+  var canvas = document.getElementById ( "canvas" );
+  var context = canvas.getContext ( "2d" );
+
+  context.fillStyle = "#" + toHex ( red ) + toHex ( green ) + toHex ( blue );
+  context.fillRect ( 0, 0, canvas.width, canvas.height );
+};
+
+
+////////////////////////////////////////////////////////////////////////////////
+//
 //  Called when the canvas needs to be drawn.
 //
 ////////////////////////////////////////////////////////////////////////////////
@@ -85,5 +116,6 @@ var drawCanvas = function ( width, height )
 
 var drawScene = function ( width, height )
 {
+  background ( 20, 40, 60 );
   this.rect ( 20, 20, width / 3, height / 2 );
 };

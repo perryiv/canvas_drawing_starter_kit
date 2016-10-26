@@ -1,0 +1,19 @@
+{
+  "name": "canvas_drawing_starter_kit",
+  "version": "0.1.0",
+  "description": "Minimal setup needed for drawing on an HTML canvas using JavaScript",
+  "main": "Main.js",
+  "scripts": {
+    "test": "echo There is no test && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/perryiv/canvas_drawing_starter_kit.git"
+  },
+  "author": "Perry Miller",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/perryiv/canvas_drawing_starter_kit/issues"
+  },
+  "homepage": "https://github.com/perryiv/canvas_drawing_starter_kit"
+}

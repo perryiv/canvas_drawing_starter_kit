@@ -66,7 +66,7 @@ jQuery ( document ).ready ( function()
   onResize();
 
   // Start the repeated calls to the draw function.
-  window.requestAnimationFrame ( drawCanvas.bind ( program.context, program.canvas.width, program.canvas.height ) );
+  window.requestAnimationFrame ( drawCanvas.bind ( program.context, program.canvas.width, program.canvas.height, 0 ) );
 } );
 
 
@@ -99,13 +99,17 @@ var setFillColor = function ( red, green, blue )
 ////////////////////////////////////////////////////////////////////////////////
 //
 //  Fill in the canvas with the color.
+//  http://codetheory.in/why-clearrect-might-not-be-clearing-canvas-pixels/
 //
 ////////////////////////////////////////////////////////////////////////////////
 
 var background = function ( red, green, blue )
 {
   setFillColor ( red, green, blue );
+  program.context.beginPath();
   program.context.fillRect ( 0, 0, program.canvas.width, program.canvas.height );
+  program.context.stroke();
+  program.context.closePath();
 };
 
 
@@ -115,11 +119,13 @@ var background = function ( red, green, blue )
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-var drawCanvas = function ( width, height )
+var drawCanvas = function ( width, height, frameCount )
 {
-  drawScene.call ( this, width, height );
+  console.log ( "frame:", frameCount );
+  this.clearRect ( 0, 0, width, height );
+  drawScene.call ( this, width, height, frameCount );
   this.stroke();
-  window.requestAnimationFrame ( drawCanvas.bind ( this, width, height ) );
+  window.requestAnimationFrame ( drawCanvas.bind ( this, width, height, ++frameCount ) );
 };
 
 
@@ -129,8 +135,18 @@ var drawCanvas = function ( width, height )
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-var drawScene = function ( width, height )
+var drawScene = function ( width, height, frameCount )
 {
   background ( 20, 40, 60 );
-  this.rect ( 20, 20, width / 3, height / 2 );
+
+  var x = frameCount;
+  if ( x > ( width / 2 ) )
+  {
+    x = 0;
+  }
+
+  this.beginPath();
+  this.rect ( x, 0, width / 3, height / 2 );
+  this.stroke();
+  this.closePath();
 };

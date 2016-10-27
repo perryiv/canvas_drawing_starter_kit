@@ -17,9 +17,17 @@ module.exports = {
     "quotes": [ "error", "double" ],
     "semi": [ "error", "always" ],
     "no-console": "off",
-    "no-empty": "off"
+    "no-empty": "off",
+    "no-unused-vars": "off"
   },
   "globals": {
-    "$": true
+    "$": true,
+    "details": true,
+    "drawScene": true,
+    "background": true,
+    "rect": true,
+    "fillRect": true,
+    "ellipse": true,
+    "fillColor": true
   }
 };

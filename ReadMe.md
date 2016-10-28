@@ -30,7 +30,7 @@ Load this URL in your favorite browser:
 
 	http://localhost:8080/
 
-Open this file in your favorite test editor:
+Open this file in your favorite text editor:
 
 	canvas_drawing_starter_kit/Source/Draw.js
 

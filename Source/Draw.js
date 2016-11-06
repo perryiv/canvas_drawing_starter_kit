@@ -14,8 +14,8 @@
 
 var xPos = 0;
 var yPos = 0;
-var xOffset = 5;
-var yOffset = 5;
+var xSpeed = 5; // Pixels/frame
+var ySpeed = 5;
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -37,35 +37,35 @@ var drawScene = function ( canvasWidth, canvasHeight )
   fillRect ( xPos, yPos, width, height );
 
   // Increment for next time.
-  xPos = xPos + xOffset;
-  yPos = yPos + yOffset;
+  xPos = xPos + xSpeed;
+  yPos = yPos + ySpeed;
 
   // Did we go too far to the left?
   if ( xPos < 0 )
   {
-    xOffset *= -1;
-    xPos = 0;
+    xSpeed *= -1; // Change direction.
+    xPos = 0;     // Reset the position.
   }
 
   // Did we go too far to the right?
   if ( ( xPos + width ) > canvasWidth )
   {
-    xOffset *= -1;
-    xPos = canvasWidth - width;
+    xSpeed *= -1;               // Change direction.
+    xPos = canvasWidth - width; // Reset the position.
   }
 
   // Did we go too far up?
   if ( yPos < 0 )
   {
-    yOffset *= -1;
-    yPos = 0;
+    ySpeed *= -1; // Change direction.
+    yPos = 0;     // Reset the position.
   }
 
   // Did we go too far down?
   if ( ( yPos + height ) > canvasHeight )
   {
-    yOffset *= -1;
-    yPos = canvasHeight - height;
+    ySpeed *= -1;                 // Change direction.
+    yPos = canvasHeight - height; // Reset the position.
   }
 
   rect(379, 679, 788, 891);

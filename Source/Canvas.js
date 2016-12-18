@@ -101,3 +101,19 @@ var fillRect = function ( x, y, width, height )
   context.fillRect ( x, y, width, height );
   context.closePath();
 };
+
+
+////////////////////////////////////////////////////////////////////////////////
+//
+//  Draw an ellipse.
+//
+////////////////////////////////////////////////////////////////////////////////
+
+var ellipse = function ( x, y, radiusX, radiusY )
+{
+  var context = details.context;
+  context.beginPath();
+  context.ellipse ( x, y, radiusX, radiusY, 0, 0, 2 * Math.PI );
+  context.stroke();
+  context.closePath();
+};
